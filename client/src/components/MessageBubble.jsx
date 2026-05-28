@@ -34,8 +34,7 @@ const MessageBubble = ({ role, content }) => {
   };
 
   return (
-    <div style={bubbleStyle}>
-  
+    
 
     
 

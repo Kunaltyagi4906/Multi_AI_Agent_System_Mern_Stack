@@ -8,10 +8,54 @@ function App() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [history, setHistory] = useState([]);
+  const openChat = (chat) => {
+  setMessages([
+    {
+      role: "user",
+      content: chat.userInput,
+    },
+    {
+      role: "planner",
+      content: chat.planner,
+    },
+    {
+      role: "executor",
+      content: chat.executor,
+    },
+    {
+      role: "critic",
+      content: chat.critic,
+    },
+    {
+      role: "final",
+      content: chat.final,
+    },
+    {
+      role: "meta",
+      content: `Score: ${chat.score}/10 | Rounds: ${chat.rounds}`,
+    },
+  ]);
+};
+  const fetchHistory = async () => {
+  try {
+    const res = await axios.get(
+      "http://localhost:5000/api/history"
+    );
+
+    setHistory(res.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+ useEffect(() => {
+  fetchHistory();
+}, []);
   useEffect(() => {
   bottomRef.current?.scrollIntoView({ behavior: "smooth" });
 }, [messages]);
   const sendMessage = () => {
+   
   if (!input.trim() || loading) return;
 
   setMessages((prev) => [
@@ -29,6 +73,7 @@ function App() {
     const data = JSON.parse(event.data);
 
     if (data.done) {
+      fetchHistory();
       setLoading(false);
       eventSource.close();
       return;
@@ -62,7 +107,25 @@ function App() {
 };
 
   return (
+    
     <div className="app">
+     <div className="sidebar">
+      <h3>
+        Chat History
+      </h3>
+      {history.map((chat) => (
+        <div
+           key={chat._id}
+           className="history-item"
+            onClick={()=> openChat(chat)}
+            >
+          {chat.userInput}
+            </div>
+
+
+      ))}
+
+     </div>
       <div className="chat-container">
 
       <h2 className="title">
@@ -100,9 +163,13 @@ function App() {
         <button onClick={sendMessage} disabled={loading}>
           {loading ? "Thinking..." : "Send"}
         </button>
+        
+
+        
+      </div>
       </div>
     </div>
-  </div>
+
   );
 }
 

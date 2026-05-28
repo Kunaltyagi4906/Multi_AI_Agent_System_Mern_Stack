@@ -36,6 +36,25 @@ body::before {
   background: transparent;
 }
 
+.sidebar {
+  width: 260px;
+  background: rgba(255,255,255,0.05);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.history-item {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.history-item:hover {
+  background: rgba(255,255,255,0.1);
+}
 /* Container */
 .chat-container {
   width: 700px;

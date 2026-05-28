@@ -2,6 +2,7 @@ import { plannerAgent } from "../agents/plannerAgent.js";
 import { executorAgent } from "../agents/executorAgent.js";
 import { criticAgent } from "../agents/criticAgent.js";
 import { finalAgent } from "../agents/finalAgent.js";
+import Chat from "../../models/chatModel.js";
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 const extractScore = (text) => {
@@ -45,12 +46,22 @@ export const runAgents = async (userInput) => {
     critique,
   });
 
-  return {
-    planner: plan,
-    executor: execution,
-    critic: critique,
-    final, // 👈 NEW
-    score,
-    rounds: round,
-  };
+  await Chat.create({
+  userInput,
+  planner: plan,
+  executor: execution,
+  critic: critique,
+  final,
+  score,
+  rounds: round,
+});
+
+return {
+  planner: plan,
+  executor: execution,
+  critic: critique,
+  final,
+  score,
+  rounds: round,
+};
 };
