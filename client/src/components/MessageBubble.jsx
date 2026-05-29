@@ -1,78 +1,59 @@
 import { useTypingEffect } from "../hooks/useTypingEffect";
 
-const MessageBubble = ({ role, content }) => {
-  const typedText = useTypingEffect(content);
-
-  const isUser = role === "user";
-
-  const getLabel = () => {
-    if (role === "planner") return "🤖 Planner";
-    if (role === "executor") return "⚙️ Executor";
-    if (role === "critic") return "💀 Critic";
-    if (role === "final") return "🧠 Final";
-    if (role === "user") return "👤 You";
-    return "📊 System";
-  };
-  const bubbleStyle = {
-  padding: "10px 14px",
-  borderRadius: "12px",
-  margin: "6px 0",
-  maxWidth: "80%",
-  backdropFilter: "blur(10px)",
-  background:
-    role === "user"
-      ? "linear-gradient(135deg, #6366f1, #4f46e5)"
-      : "rgba(255,255,255,0.08)",
-  alignSelf: role === "user" ? "flex-end" : "flex-start",
+const roleMeta = {
+  planner: {
+    label: "Planner",
+    tone: "tone-planner",
+    accent: "Strategy Agent",
+  },
+  executor: {
+    label: "Executor",
+    tone: "tone-executor",
+    accent: "Execution Agent",
+  },
+  critic: {
+    label: "Critic",
+    tone: "tone-critic",
+    accent: "Review Agent",
+  },
+  final: {
+    label: "Final",
+    tone: "tone-final",
+    accent: "Synthesis Agent",
+  },
+  user: {
+    label: "You",
+    tone: "tone-user",
+    accent: "Prompt",
+  },
+  meta: {
+    label: "Run Data",
+    tone: "tone-meta",
+    accent: "Saved Session",
+  },
 };
 
-  const agentColors = {
-    planner: "#22c55e",
-    executor: "#3b82f6",
-    critic: "#ef4444",
-    final: "#a855f7",
+const MessageBubble = ({ role, content }) => {
+  const typedText = useTypingEffect(content);
+  const isUser = role === "user";
+  const meta = roleMeta[role] || {
+    label: "System",
+    tone: "tone-meta",
+    accent: "System Message",
   };
 
   return (
-    
-
-    
-
-    <div
-      style={{
-        display: "flex",
-        justifyContent: isUser ? "flex-end" : "flex-start",
-        marginBottom: "12px",
-      }}
-    >
-      <div
-        style={{
-          background: isUser
-            ? "#6366f1"
-            : agentColors[role] || "#374151",
-          color: "white",
-          padding: "12px",
-          borderRadius: "12px",
-          maxWidth: "70%",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-        }}
-      >
-        {/* Label */}
-        <div
-          style={{
-            fontSize: "12px",
-            opacity: 0.7,
-            marginBottom: "4px",
-          }}
-        >
-          {getLabel()}
+    <div className={`message-row ${isUser ? "user-row" : "agent-row"}`}>
+      <article className={`message-card ${meta.tone}`}>
+        <div className="message-topline">
+          <span className="message-label">{meta.label}</span>
+          <span className="message-accent">{meta.accent}</span>
         </div>
 
-        {/* Content */}
-        <div style={{ whiteSpace: "pre-wrap", lineHeight: "1.5" }}>
+        <div className="message-content">
           {isUser ? content : typedText}
         </div>
-      </div>
+      </article>
     </div>
   );
 };

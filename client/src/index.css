@@ -1,1 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
 
+:root {
+  color-scheme: dark;
+  --bg-deep: #07111f;
+  --bg-mid: #10243f;
+  --bg-soft: #193b59;
+  --text-main: #f4f7ff;
+  --text-muted: rgba(244, 247, 255, 0.72);
+  --accent-gold: #f8c15c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at top left, rgba(248, 193, 92, 0.12), transparent 25%),
+    radial-gradient(circle at 85% 10%, rgba(25, 59, 89, 0.7), transparent 22%),
+    radial-gradient(circle at 80% 80%, rgba(187, 62, 3, 0.18), transparent 18%),
+    linear-gradient(135deg, var(--bg-deep), var(--bg-mid) 48%, #1a2338 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at center, black 45%, transparent 95%);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+code,
+pre,
+.message-content {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.24);
+}

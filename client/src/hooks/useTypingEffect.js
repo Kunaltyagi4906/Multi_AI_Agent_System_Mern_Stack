@@ -17,7 +17,7 @@ export const useTypingEffect = (text, speed = 15) => {
     }, speed);
 
     return () => clearInterval(interval);
-  }, [text]);
+  }, [text, speed]);
 
   return displayed;
 };

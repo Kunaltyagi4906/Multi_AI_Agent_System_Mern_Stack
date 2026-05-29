@@ -19,16 +19,36 @@ Your task:
 - Include improvements suggested by critic
 - Make it realistic (MVP approach)
 
-FORMAT:
+Use this exact format:
+Final Blueprint:
+Objective:
+<one sentence>
 
-Final Plan:
-
+Execution Plan:
 Step 1:
-Step 2:
-Step 3:
-...
+- What:
+- Why:
+- Deliverable:
 
-Keep it clean, practical, and easy to follow.
+Step 2:
+- What:
+- Why:
+- Deliverable:
+
+Step 3:
+- What:
+- Why:
+- Deliverable:
+
+Resources:
+- Tools:
+- Team:
+- Budget:
+
+Success Check:
+- <one measurable outcome>
+
+Keep it clean, practical, and easy to follow. Return plain text only.
 
 User Request:
 ${userInput}

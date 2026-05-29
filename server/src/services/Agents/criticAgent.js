@@ -10,8 +10,10 @@ Weaknesses:
 - (max 2 bullets)
 Improvements:
 - (max 2 bullets)
+Revision Priority:
+- <single most important fix>
 
-Be specific and concise.
+Be specific, concise, and blunt.
 
 Execution:
 ${execution.slice(0, 800)}

@@ -2,15 +2,6 @@ import { callLLM } from "../llm/clientllm.js";
 
 export const executorAgent = async ({ plan, critique = "", userInput }) => {
   const prompt = `
-  ALWAYS keep step-by-step format.
-  
-  Do NOT convert into paragraphs or sections.
-  
-  Even after improvements:
-  - Maintain Step 1, Step 2 format
-  - Only improve existing steps or add new steps
-  
-  Never change structure.
 You are a startup execution expert.
 
 Convert the plan into REAL ACTION.
@@ -29,14 +20,31 @@ Avoid:
 - large hiring
 - complex systems
 
-FORMAT:
-
-Step:
+ALWAYS use this exact format:
+Execution:
+Step 1:
 - Action:
 - How:
 - Tools:
 - Time:
 - Cost:
+
+Step 2:
+- Action:
+- How:
+- Tools:
+- Time:
+- Cost:
+
+Step 3:
+- Action:
+- How:
+- Tools:
+- Time:
+- Cost:
+
+Add Step 4 only if truly needed.
+Do not turn the answer into paragraphs.
 User Task:
 ${userInput}
 
@@ -49,7 +57,7 @@ If critique exists:
 - Improve execution
 - Fix weaknesses
 
-Keep it practical and under 120 words.
+Keep it practical, specific, and under 220 words.
 `;
 
   return await callLLM(prompt);
